@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         textView = findViewById(R.id.id_tv);
         recyclerView = findViewById(R.id.id_rv);
         final ListPojo responseListPojo = new ListPojo();
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         MetMuseumService metMuseumService = RetrofitInstance.getRetrofitInstance().create(MetMuseumService.class);
         Call<ListPojo> validObjectListCall = metMuseumService.getValidObjectList();
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<ListPojo> call, Response<ListPojo> response) {
                 responseListPojo.setObjectIds(response.body().getObjectIds());
                 responseListPojo.setTotal(response.body().total);
+                recyclerView.setAdapter(new ArtsAdapter(responseListPojo));
             }
             @Override
             public void onFailure(Call<ListPojo> call, Throwable t) {
@@ -35,7 +37,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        recyclerView.setAdapter(new ArtsAdapter());
     }
 }

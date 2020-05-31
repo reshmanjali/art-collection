@@ -9,8 +9,21 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 class ArtsAdapter extends RecyclerView.Adapter<ArtsAdapter.MyViewHolder> {
 
+    ListPojo validObjectsListPojo;
+    int[] objectIds;
+    MetMuseumService metMuseumService;//= RetrofitInstance.getRetrofitInstance().create(MetMuseumService.class);
+
+    public ArtsAdapter(ListPojo responseListPojo) {
+        validObjectsListPojo = responseListPojo;
+        objectIds = validObjectsListPojo.getObjectIds();
+        metMuseumService = RetrofitInstance.getRetrofitInstance().create(MetMuseumService.class);
+    }
 
     @NonNull
     @Override
@@ -23,7 +36,24 @@ class ArtsAdapter extends RecyclerView.Adapter<ArtsAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        myViewHolder.artName.setText("ddfdsc");
+        setDataAfterAServiceCall(myViewHolder,i);
+    }
+
+    void setDataAfterAServiceCall(final MyViewHolder myViewHolder, int i){
+        Call<ArtObjectPojo> arObject = metMuseumService.getArObject(objectIds[i]);
+        arObject.enqueue(new Callback<ArtObjectPojo>() {
+            @Override
+            public void onResponse(Call<ArtObjectPojo> call, Response<ArtObjectPojo> response) {
+                myViewHolder.artName.setText(response.body().getTitle());
+            }
+
+            @Override
+            public void onFailure(Call<ArtObjectPojo> call, Throwable t) {
+                myViewHolder.artName.setText("Uff Sorry");
+            }
+        });
+       // myViewHolder.artName.setText("hgyghb");
+
     }
 
     @Override
