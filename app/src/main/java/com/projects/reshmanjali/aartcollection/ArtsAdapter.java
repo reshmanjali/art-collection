@@ -49,7 +49,7 @@ class ArtsAdapter extends RecyclerView.Adapter<ArtsAdapter.MyViewHolder> {
                 ArtObjectPojo body = response.body();
                 myViewHolder.artName.setText(body.getTitle());
                 myViewHolder.artCulture.setText("Culture: "+ body.getCulture());
-                myViewHolder.artCreditLine.append("Credit Line "+ body.getCreditLine());
+                myViewHolder.artCreditLine.setText("Credit Line "+ body.getCreditLine());
                 if(body.getPrimaryImage() != "")
                     Picasso.with(context).load(body.getPrimaryImage()).into(myViewHolder.artImg);
                 else
