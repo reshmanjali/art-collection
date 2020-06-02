@@ -1,16 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="3dp">
 
-    <TextView
+    <android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    app:cardCornerRadius="5dp"
+    android:background="@drawable/border"
+    android:padding="4dp"
+    android:elevation="2dp">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:fontFamily="sans-serif"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:padding="4dp"
+        >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.7"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginRight="8dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="monospace"
         android:textStyle="bold"
+        android:textSize="24sp"
         android:textColor="@color/colorAccent"
-        android:text="jhfudif"
-        android:id="@+id/id_art_name_tv"/>
+        android:id="@+id/id_art_name_tv"
+        android:layout_marginBottom="2dp"/>
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Culture: "
+         android:id="@+id/id_art_culture_tv"
+         android:fontFamily="sans-serif"
+         android:layout_marginBottom="2dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CreditLine: "
+            android:id="@+id/id_art_cLine_tv"
+            android:fontFamily="sans-serif"/>
+    </LinearLayout>
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_weight="0.3"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_placeholder"
+        android:id="@+id/id_art_img_iv"/>
+</LinearLayout>
+    </android.support.v7.widget.CardView>
+
 </LinearLayout>
